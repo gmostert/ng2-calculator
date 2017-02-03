@@ -1,11 +1,13 @@
 # Ng2Calculator
 
 This is a basic calculator that performs some arithmetic operations (addition, subtraction, multiplication, divesion, square root).
+
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
+
 It requires a [nodejs](https://nodejs.org/en/) environment in order to run.
 
 ## Getting started
-Clone the repostory
+Clone the repository
 
     git clone https://github.com/gmostert/ng2-calculator
 
