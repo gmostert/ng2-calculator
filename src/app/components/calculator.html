@@ -1,0 +1,39 @@
+        <form [formGroup]="group" class="container-fluid">
+            <h1>Calculator</h1>
+            <div class="form-group">
+                <label for="input1">Number</label>
+                <input type="text" id="input1" class="form-control" 
+                    [formControl]="group.controls['input1']"
+                    [(ngModel)]="operation.input1"
+                    [ngClass]="{'form-control-danger': !group.controls['input1'].valid && group.controls['input1'].dirty}"/>
+                <div *ngIf="group.controls['input1'].hasError('required') && group.controls['input1'].touched" class="help-block">Please enter a number</div>
+                <div *ngIf="group.controls['input1'].hasError('pattern') && group.controls['input1'].touched" class="help-block">Only numbers may be used for calculations</div>
+            </div>
+            <div class="form-group">
+                <label for="operation">Operation</label>
+                <select id="operation" class="form-control" 
+                    [formControl]="group.controls['operation']"
+                    [(ngModel)]="operation.operationId">
+				    <option *ngFor="let operator of operators" [value]="operator.id">{{operator.name}}</option>
+                </select>
+                <div *ngIf="group.controls['operation'].hasError('required') && group.controls['operation'].touched" class="help-block">Please select a operation</div>
+            </div>
+            <div class="form-group">
+                <label for="input2">Number</label>
+                <input type="text" id="input2" class="form-control" 
+                    [formControl]="group.controls['input2']"
+                    [(ngModel)]="operation.input2"/>
+                <div *ngIf="group.controls['input2'].hasError('required') && group.controls['input2'].touched" class="help-block">Please enter a number</div>
+                <div *ngIf="group.controls['input2'].hasError('invalidNumber') && group.controls['input2'].touched" class="help-block">Only numbers may be used for calculations</div>
+            </div>
+			<button type="submit" class="btn btn-primary" (click)="runOperation(operation)" [disabled]="!group.valid">GO</button>
+            <br>
+            <br>
+            <div class="form-group big-font">
+                <span>{{operation.input1}}</span>
+                <span>{{getOperatorSign(operation.operationId)}}</span>
+                <span>{{operation.input2}}</span>
+                <span *ngIf="operation.result">=</span>
+                <span *ngIf="operation.result">{{operation.result | number : '1.0-2'}}</span>
+            </div>
+        <form>
